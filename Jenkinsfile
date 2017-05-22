@@ -19,7 +19,7 @@ pipeline {
                     sh 'mvn release:prepare release:perform ' +
                             '-s ${SETTINGS} ' +
                             '-DreleaseVersion=${params.RELEASE_VERSION} ' +
-                            '-DdevelopmentVersion=${params.DEVELOPMENT_VERSION-SNAPSHOT}'
+                            '-DdevelopmentVersion=${params.DEVELOPMENT_VERSION}-SNAPSHOT'
                 }
             }
         }
