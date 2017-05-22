@@ -13,11 +13,10 @@ pipeline {
                 sh 'git checkout master && git pull origin master'
                 configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
                     sshagent(['qameta-ci_ssh']) {
-                        sh "mvn release:prepare -B -s ${env.SETTINGS} " +
+                        sh "mvn release:prepare release:perform -B -s ${env.SETTINGS} " +
                                 "-DreleaseVersion=${params.RELEASE_VERSION} " +
                                 "-DdevelopmentVersion=${params.DEVELOPMENT_VERSION}-SNAPSHOT"
                     }
-                    sh "mvn release:perform -B -s ${env.SETTINGS}"
                 }
             }
         }
