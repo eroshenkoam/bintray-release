@@ -19,7 +19,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'qameta-ci_github', passwordVariable: 'GITHUB_PASSWORD', usernameVariable: 'GITHUB_USERNAME')]) {
                         sh "mvn -B release:prepare " +
                                 "-s ${env.SETTINGS} " +
-                                "-Dtag=${params.RELEASE_VERSION} "
+                                "-Dtag=${params.RELEASE_VERSION} " +
                                 "-Dusername=${env.GITHUB_USERNAME} " +
                                 "-Dpassword=${env.GITHUB_PASSWORD}"
                     }
