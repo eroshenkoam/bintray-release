@@ -17,8 +17,8 @@ pipeline {
             steps {
                 configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
                     sh 'echo ${SETTINGS}'
-                    sh 'echo ${params.RELEASE_VERSION}'
-                    sh 'echo ${params.DEVELOPMENT_VERSION}'
+                    sh "echo ${params.RELEASE_VERSION}"
+                    sh "echo ${params.DEVELOPMENT_VERSION}"
 //
 //                    sh 'mvn release:prepare release:perform ' +
 //                            '-s ${SETTINGS} ' +
