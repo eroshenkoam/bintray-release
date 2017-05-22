@@ -12,16 +12,16 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean verify'
             }
         }
-//        stage('Release') {
-//            when { expression { return params.RELEASE } }
-//            steps {
-//                configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
-//                    sh 'mvn release:prepare release:perform ' +
-//                            '-s ${SETTINGS} ' +
-//                            '-DreleaseVersion=${params.RELEASE_VERSION} ' +
-//                            '-DdevelopmentVersion=${params.DEVELOPMENT_VERSION-SNAPSHOT}'
-//                }
-//            }
-//        }
+        stage('Release') {
+            when { expression { return params.RELEASE } }
+            steps {
+                configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
+                    sh 'mvn release:prepare release:perform ' +
+                            '-s ${SETTINGS} ' +
+                            '-DreleaseVersion=${params.RELEASE_VERSION} ' +
+                            '-DdevelopmentVersion=${params.DEVELOPMENT_VERSION-SNAPSHOT}'
+                }
+            }
+        }
     }
 }
