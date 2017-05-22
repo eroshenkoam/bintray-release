@@ -17,14 +17,11 @@ pipeline {
             steps {
                 configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
                     withCredentials([usernamePassword(credentialsId: 'qameta-ci_github', passwordVariable: 'GITHUB_PASSWORD', usernameVariable: 'GITHUB_USERNAME')]) {
-                        sh "mvn release:prepare " +
+                        sh "mvn -B release:prepare " +
                                 "-s ${env.SETTINGS} " +
+                                "-Dtag=${params.RELEASE_VERSION} "
                                 "-Dusername=${env.GITHUB_USERNAME} " +
                                 "-Dpassword=${env.GITHUB_PASSWORD}"
-                        sh "mvn release:perform " +
-                                "-s ${env.SETTINGS} " +
-                                "-DreleaseVersion=${params.RELEASE_VERSION} " +
-                                "-DdevelopmentVersion=${params.DEVELOPMENT_VERSION}-SNAPSHOT"
                     }
                 }
 
