@@ -11,19 +11,19 @@ pipeline {
             when { expression { return params.RELEASE } }
             steps {
                 sh 'git checkout master && git pull origin master'
-                sshagent(['qameta-ci_ssh']) {
-                    configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
+                configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
+                    sshagent(['qameta-ci_ssh']) {
                         sh "mvn release:prepare -B -s ${env.SETTINGS} " +
                                 "-DreleaseVersion=${params.RELEASE_VERSION} " +
                                 "-DdevelopmentVersion=${params.DEVELOPMENT_VERSION}-SNAPSHOT"
                     }
+                    sh "mvn release:perform -B -s ${env.SETTINGS}"
                 }
             }
         }
-    }
-    post {
-        always {
-            deleteDir()
+        post {
+            always {
+                deleteDir()
+            }
         }
     }
-}
