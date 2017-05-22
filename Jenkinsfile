@@ -16,14 +16,10 @@ pipeline {
             when { expression { return params.RELEASE } }
             steps {
                 configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
-                    sh "echo ${env.SETTINGS}"
-                    sh "echo ${params.RELEASE_VERSION}"
-                    sh "echo ${params.DEVELOPMENT_VERSION}"
-//
-//                    sh 'mvn release:prepare release:perform ' +
-//                            '-s ${SETTINGS} ' +
-//                            '-DreleaseVersion=${params.RELEASE_VERSION} ' +
-//                            '-DdevelopmentVersion=${params.DEVELOPMENT_VERSION}-SNAPSHOT'
+                    sh "mvn release:prepare release:perform " +
+                            "-s ${env.SETTINGS} " +
+                            "-DreleaseVersion=${params.RELEASE_VERSION} " +
+                            "-DdevelopmentVersion=${params.DEVELOPMENT_VERSION}-SNAPSHOT"
                 }
             }
         }
