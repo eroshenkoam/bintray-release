@@ -1,11 +1,11 @@
 pipeline {
     agent { label 'java' }
     tools { maven 'default' }
-//    parameters {
-//        booleanParam(name: 'RELEASE', defaultValue: 'false', description: '')
-//        string(name: 'RELEASE_VERSION', defaultValue: '', description: 'Release version')
-//        string(name: 'DEVELOPMENT_VERSION', defaultValue: '', description: 'Development version (without SNAPSHOT)')
-//    }
+    parameters {
+        booleanParam(name: 'RELEASE', defaultValue: 'false', description: 'Perform release?')
+        string(name: 'RELEASE_VERSION', defaultValue: '', description: 'Release version')
+        string(name: 'DEVELOPMENT_VERSION', defaultValue: '', description: 'Development version (without SNAPSHOT)')
+    }
     stages {
         stage('Build') {
             steps {
