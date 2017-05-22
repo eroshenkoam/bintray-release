@@ -16,7 +16,7 @@ pipeline {
             when { expression { return params.RELEASE } }
             steps {
                 configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
-                    sh 'echo ${SETTINGS}'
+                    sh "echo ${env.SETTINGS}"
                     sh "echo ${params.RELEASE_VERSION}"
                     sh "echo ${params.DEVELOPMENT_VERSION}"
 //
