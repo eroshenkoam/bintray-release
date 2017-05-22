@@ -13,7 +13,6 @@ pipeline {
                 sshagent(['qameta-ci_ssh']) {
                     configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
                         sh "mvn release:prepare -B -s ${env.SETTINGS} " +
-                                "-Dtag=${params.RELEASE_VERSION}" +
                                 "-DreleaseVersion=${params.RELEASE_VERSION} " +
                                 "-DdevelopmentVersion=${params.DEVELOPMENT_VERSION}-SNAPSHOT"
                     }
