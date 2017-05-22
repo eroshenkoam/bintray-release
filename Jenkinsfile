@@ -10,6 +10,7 @@ pipeline {
         stage('Release') {
             when { expression { return params.RELEASE } }
             steps {
+                sh 'git checkout master && git pull origin master'
                 sshagent(['qameta-ci_ssh']) {
                     configFileProvider([configFile(fileId: 'bintray-settings.xml', variable: 'SETTINGS', replaceTokens: true)]) {
                         sh "mvn release:prepare -B -s ${env.SETTINGS} " +
