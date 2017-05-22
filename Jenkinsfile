@@ -12,6 +12,13 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean verify'
             }
         }
+        stage('Test') {
+            steps {
+                sshagent(['qameta-ci_ssh']) {
+                    sh 'ssh -T git@github.com'
+                }
+            }
+        }
         stage('Release') {
             when { expression { return params.RELEASE } }
             steps {
