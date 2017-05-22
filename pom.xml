@@ -4,13 +4,13 @@
 
     <groupId>com.eroshenkoam.samples</groupId>
     <artifactId>bintray-release</artifactId>
-    <version>1.7</version>
+    <version>1.8-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/eroshenkoam/bintray-release</url>
         <connection>scm:git:git@github.com:eroshenkoam/bintray-release.git</connection>
         <developerConnection>scm:git:git@github.com:eroshenkoam/bintray-release.git</developerConnection>
-        <tag>1.7</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <build>
